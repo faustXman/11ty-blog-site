@@ -1,35 +1,46 @@
 ---
-title: My homepage
+title: Education Innovation Hub
 layout: 'base.njk'
 ---
 
-  <section class="hero">
-    <div class="container flow">
-      <div class="hero__content flow">
-        <h1 class="section-title">Welcome to my blog!</h1>
-        <p>I use this space to document my adventures in front-end development, sharing how I've overcome issues I've run into, useful resources, and more.</p>
-        <p>Below are some of my favourite articles, or you can go to the blog page to see my most recent posts.</p>
-        <div class="flex-group">
-          <a href="#featured-articles" class="btn btn--primary">Featured articles</a>
-          <a href="./blog" class="btn btn--neutral">Most recent articles</a>
-        </div>
-      </div>
-      <div>
-        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=510&h=340&fit=crop" alt="UK School Students" class="hero__image">
-      </div>
+<section class="hero">
+  <div class="hero__background"></div>
+  <div class="container flow">
+    <div class="hero__content flow">
+      <h1 class="section-title">Shaping Tomorrow's Education</h1>
+      <p>Exploring innovative approaches to learning, from primary to secondary education in the UK. Discover insights, research, and practical solutions for modern education.</p>
     </div>
-  </section>
+  </div>
 
-  <section id="featured-articles" class="featured-articles">
-    <div class="container flow">
-      <h2 class="section-title text-center">Featured articles</h2>
-      <p class="text-center">Here is a sample of articles which I feel give you a good idea of what this site is all about.</p>
-      <ul role="list" class="articles__list flow">
-
-        {%- for post in collections.featured | reverse -%}
-          {% include 'article-snippent.njk' %}
-        {%- endfor %}
-
-     </ul>
+  <nav class="circular-menu">
+    <div class="menu-button">
+      <span class="menu-icon"></span>
     </div>
-  </section>
+    <div class="menu-items">
+      <a href="/blog/" class="menu-item" aria-label="Blog">
+        <span class="menu-item-icon">📚</span>
+        <span class="menu-item-text">Blog</span>
+      </a>
+      <a href="/contact/" class="menu-item" aria-label="Contact">
+        <span class="menu-item-icon">✉️</span>
+        <span class="menu-item-text">Contact</span>
+      </a>
+      <a href="#featured-articles" class="menu-item" aria-label="Featured">
+        <span class="menu-item-icon">⭐</span>
+        <span class="menu-item-text">Featured</span>
+      </a>
+    </div>
+  </nav>
+</section>
+
+<section id="featured-articles" class="featured-articles">
+  <div class="container flow">
+    <h2 class="section-title text-center">Featured Insights</h2>
+    <p class="text-center">Explore our most impactful articles on educational innovation and best practices.</p>
+    <ul role="list" class="articles__list flow">
+      {%- for post in collections.featured | reverse -%}
+        {% include 'article-snippent.njk' %}
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
