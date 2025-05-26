@@ -3,7 +3,7 @@ title: My Second Article
 description: lalala
 author: Faust Deaconu
 date: 2025-01-01T00:00:00.000Z
-tags: post
+tags: ["post", "featured"]
 image: https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=600&fit=crop
 imageAlt: UK Secondary School Science Lab with Older Students
 ---

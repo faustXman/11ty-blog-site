@@ -3,7 +3,7 @@ title: My Fifth Article
 description: lalala
 author: Faust Deaconu
 date: 2025-01-01T00:00:00.000Z
-tags: post
+tags: ["post", "featured"]
 image: https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop
 imageAlt: UK School Assembly with Students of Different Ages
 ---
