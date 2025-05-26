@@ -27,23 +27,3 @@ layout: 'base.njk'
     </a>
   </nav>
 </div>
-
-<section class="hero">
-  <div class="hero__background"></div>
-  <div class="hero__content">
-    <h1 class="section-title">Shaping Tomorrow's Education</h1>
-    <p>Exploring innovative approaches to learning, from primary to secondary education in the UK.</p>
-  </div>
-</section>
-
-<section id="featured-articles" class="featured-articles">
-  <div class="container flow">
-    <h2 class="section-title text-center">Featured Insights</h2>
-    <p class="text-center">Explore our most impactful articles on educational innovation and best practices.</p>
-    <ul role="list" class="articles__list flow">
-      {%- for post in collections.featured | reverse -%}
-        {% include 'article-snippent.njk' %}
-      {%- endfor %}
-    </ul>
-  </div>
-</section>
