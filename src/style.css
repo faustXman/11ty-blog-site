@@ -284,28 +284,40 @@ section,
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Circular Navigation */
+/* //////////////////////
+  Circular Navigation
+  /////////////////////// */
+
+.circular-nav-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr-primary-200);
+}
+
 .circular-nav {
   display: flex;
   gap: 2em;
-  margin-top: 2em;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 800px;
+  padding: 2em;
 }
 
 .nav-circle {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background-color: var(--clr-neutral-100);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--clr-neutral-100);
+  color: var(--clr-primary-500);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -320,12 +332,13 @@ section,
   background: linear-gradient(45deg, var(--clr-primary-400), var(--clr-primary-300));
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: -1;
+  z-index: 0;
 }
 
 .nav-circle:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  color: var(--clr-neutral-100);
 }
 
 .nav-circle:hover::before {
@@ -335,6 +348,8 @@ section,
 .nav-icon {
   font-size: 2em;
   margin-bottom: 0.5em;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-text {
@@ -342,21 +357,13 @@ section,
   font-size: 0.9em;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-}
-
-/* Featured Articles Section */
-.featured-articles {
-  background-color: var(--clr-neutral-100);
-  padding: 6em 0;
-}
-
-.featured-articles .section-title {
-  color: var(--clr-primary-500);
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 45em) {
   .circular-nav {
-    gap: 1em;
+    gap: 1.5em;
   }
   
   .nav-circle {
@@ -371,6 +378,16 @@ section,
   .nav-text {
     font-size: 0.8em;
   }
+}
+
+/* Featured Articles Section */
+.featured-articles {
+  background-color: var(--clr-neutral-100);
+  padding: 6em 0;
+}
+
+.featured-articles .section-title {
+  color: var(--clr-primary-500);
 }
 
 /* //////////////////////
