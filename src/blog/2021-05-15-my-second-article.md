@@ -1,12 +1,13 @@
 ---
 title: My Second Article
+description: lalala
 author: Faust Deaconu
-date: 2021-05-15
-tags: ["post", "featured"]
-image: /assets/blog/article-2.jpg
-imageAlt: This is a test
-description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis accusantium sit illo neque rem omnis quaerat, nam similique vitae delectus ad magni vel quo maxime, magnam placeat. Reprehenderit, distinctio aliquam?
+date: 2025-01-01T00:00:00.000Z
+tags: post
+image: https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=600&fit=crop
+imageAlt: UK Secondary School Science Lab with Older Students
 ---
+Hai sa dam mana cu mana cei cu 4 la romana.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa placerat duis ultricies lacus sed turpis tincidunt id. Sit amet nulla facilisi morbi tempus iaculis urna id volutpat. Erat nam at lectus urna duis convallis convallis. Purus faucibus ornare suspendisse sed nisi. Mauris rhoncus aenean vel elit. Dignissim convallis aenean et tortor at risus viverra adipiscing at. Tellus rutrum tellus pellentesque eu tincidunt tortor. Laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget. Eu mi bibendum neque egestas congue quisque.
 
