@@ -293,10 +293,23 @@ section,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&h=1080&fit=crop&crop=center&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.circular-nav-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
 }
 
 .circular-nav {
@@ -306,6 +319,8 @@ section,
   justify-content: center;
   max-width: 800px;
   padding: 2em;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-circle {
