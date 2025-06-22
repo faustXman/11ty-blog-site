@@ -315,18 +315,21 @@ section,
 }
 
 .circular-nav {
+  position: relative;
+  width: 600px;
+  height: 600px;
   display: flex;
-  gap: 3em;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  max-width: 900px;
+  max-width: 90vw;
+  max-height: 90vh;
   padding: 2em;
   position: relative;
   z-index: 2;
 }
 
 .nav-circle {
+  position: absolute;
   width: 140px;
   height: 140px;
   border-radius: 50%;
@@ -349,6 +352,38 @@ section,
   overflow: hidden;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
+  transform-origin: center;
+}
+
+/* Position each button in a circle */
+.nav-circle:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-circle:nth-child(2) {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.nav-circle:nth-child(3) {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-circle:nth-child(4) {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.nav-circle:nth-child(5) {
+  top: 25%;
+  right: 25%;
+  transform: translate(50%, -50%);
 }
 
 .nav-circle::before {
@@ -410,7 +445,8 @@ section,
 
 @media (max-width: 45em) {
   .circular-nav {
-    gap: 1.5em;
+    width: 400px;
+    height: 400px;
   }
   
   .nav-circle {
@@ -424,6 +460,26 @@ section,
   
   .nav-text {
     font-size: 0.8em;
+  }
+}
+
+@media (max-width: 30em) {
+  .circular-nav {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .nav-circle {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .nav-icon {
+    font-size: 1.2em;
+  }
+  
+  .nav-text {
+    font-size: 0.7em;
   }
 }
 
