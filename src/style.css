@@ -355,35 +355,40 @@ section,
   transform-origin: center;
 }
 
-/* Position each button in a circle */
+/* Position each button in a perfect circle around the center */
 .nav-circle:nth-child(1) {
-  top: 0;
+  /* Top center - 0 degrees */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%) translateY(-180px);
 }
 
 .nav-circle:nth-child(2) {
+  /* Top right - 72 degrees */
   top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(72deg) translateY(-180px) rotate(-72deg);
 }
 
 .nav-circle:nth-child(3) {
-  bottom: 0;
+  /* Bottom right - 144 degrees */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%) rotate(144deg) translateY(-180px) rotate(-144deg);
 }
 
 .nav-circle:nth-child(4) {
+  /* Bottom left - 216 degrees */
   top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(216deg) translateY(-180px) rotate(-216deg);
 }
 
 .nav-circle:nth-child(5) {
-  top: 25%;
-  right: 25%;
-  transform: translate(50%, -50%);
+  /* Top left - 288 degrees */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(288deg) translateY(-180px) rotate(-288deg);
 }
 
 .nav-circle::before {
@@ -454,6 +459,27 @@ section,
     height: 100px;
   }
   
+  /* Adjust circle radius for smaller screens */
+  .nav-circle:nth-child(1) {
+    transform: translate(-50%, -50%) translateY(-120px);
+  }
+  
+  .nav-circle:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(72deg) translateY(-120px) rotate(-72deg);
+  }
+  
+  .nav-circle:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(144deg) translateY(-120px) rotate(-144deg);
+  }
+  
+  .nav-circle:nth-child(4) {
+    transform: translate(-50%, -50%) rotate(216deg) translateY(-120px) rotate(-216deg);
+  }
+  
+  .nav-circle:nth-child(5) {
+    transform: translate(-50%, -50%) rotate(288deg) translateY(-120px) rotate(-288deg);
+  }
+  
   .nav-icon {
     font-size: 1.5em;
   }
@@ -472,6 +498,27 @@ section,
   .nav-circle {
     width: 80px;
     height: 80px;
+  }
+  
+  /* Adjust circle radius for even smaller screens */
+  .nav-circle:nth-child(1) {
+    transform: translate(-50%, -50%) translateY(-90px);
+  }
+  
+  .nav-circle:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(72deg) translateY(-90px) rotate(-72deg);
+  }
+  
+  .nav-circle:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(144deg) translateY(-90px) rotate(-144deg);
+  }
+  
+  .nav-circle:nth-child(4) {
+    transform: translate(-50%, -50%) rotate(216deg) translateY(-90px) rotate(-216deg);
+  }
+  
+  .nav-circle:nth-child(5) {
+    transform: translate(-50%, -50%) rotate(288deg) translateY(-90px) rotate(-288deg);
   }
   
   .nav-icon {
