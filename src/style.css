@@ -420,8 +420,9 @@ section,
   z-index: 0;
 }
 
-.nav-circle:hover {
-  transform: scale(1.1);
+/* Hover and active states with proper positioning */
+.nav-circle:hover:nth-child(1) {
+  transform: translate(-50%, -50%) translateY(-180px) scale(1.1);
   box-shadow: 
     inset 0 2px 4px rgba(255, 255, 255, 0.8),
     inset 0 -2px 4px rgba(0, 0, 0, 0.4),
@@ -431,28 +432,52 @@ section,
     radial-gradient(circle at 30% 30%, #f8f8f8, #e0e0e0 40%, #c8c8c8 70%, #b0b0b0);
 }
 
-.nav-circle:hover:nth-child(1) {
-  transform: translate(-50%, -50%) translateY(-180px) scale(1.1);
-}
-
 .nav-circle:hover:nth-child(2) {
   transform: translate(-50%, -50%) rotate(72deg) translateY(-180px) rotate(-72deg) scale(1.1);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  background: 
+    radial-gradient(circle at 30% 30%, #f8f8f8, #e0e0e0 40%, #c8c8c8 70%, #b0b0b0);
 }
 
 .nav-circle:hover:nth-child(3) {
   transform: translate(-50%, -50%) rotate(144deg) translateY(-180px) rotate(-144deg) scale(1.1);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  background: 
+    radial-gradient(circle at 30% 30%, #f8f8f8, #e0e0e0 40%, #c8c8c8 70%, #b0b0b0);
 }
 
 .nav-circle:hover:nth-child(4) {
   transform: translate(-50%, -50%) rotate(216deg) translateY(-180px) rotate(-216deg) scale(1.1);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  background: 
+    radial-gradient(circle at 30% 30%, #f8f8f8, #e0e0e0 40%, #c8c8c8 70%, #b0b0b0);
 }
 
 .nav-circle:hover:nth-child(5) {
   transform: translate(-50%, -50%) rotate(288deg) translateY(-180px) rotate(-288deg) scale(1.1);
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+  background: 
+    radial-gradient(circle at 30% 30%, #f8f8f8, #e0e0e0 40%, #c8c8c8 70%, #b0b0b0);
 }
 
-.nav-circle:active {
-  transform: scale(0.95);
+.nav-circle:active:nth-child(1) {
+  transform: translate(-50%, -50%) translateY(-180px) scale(0.95);
   box-shadow: 
     inset 0 4px 8px rgba(0, 0, 0, 0.4),
     inset 0 -1px 2px rgba(255, 255, 255, 0.2),
@@ -461,24 +486,44 @@ section,
     radial-gradient(circle at 30% 30%, #e0e0e0, #c8c8c8 40%, #b0b0b0 70%, #989898);
 }
 
-.nav-circle:active:nth-child(1) {
-  transform: translate(-50%, -50%) translateY(-180px) scale(0.95);
-}
-
 .nav-circle:active:nth-child(2) {
   transform: translate(-50%, -50%) rotate(72deg) translateY(-180px) rotate(-72deg) scale(0.95);
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  background: 
+    radial-gradient(circle at 30% 30%, #e0e0e0, #c8c8c8 40%, #b0b0b0 70%, #989898);
 }
 
 .nav-circle:active:nth-child(3) {
   transform: translate(-50%, -50%) rotate(144deg) translateY(-180px) rotate(-144deg) scale(0.95);
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  background: 
+    radial-gradient(circle at 30% 30%, #e0e0e0, #c8c8c8 40%, #b0b0b0 70%, #989898);
 }
 
 .nav-circle:active:nth-child(4) {
   transform: translate(-50%, -50%) rotate(216deg) translateY(-180px) rotate(-216deg) scale(0.95);
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  background: 
+    radial-gradient(circle at 30% 30%, #e0e0e0, #c8c8c8 40%, #b0b0b0 70%, #989898);
 }
 
 .nav-circle:active:nth-child(5) {
   transform: translate(-50%, -50%) rotate(288deg) translateY(-180px) rotate(-288deg) scale(0.95);
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  background: 
+    radial-gradient(circle at 30% 30%, #e0e0e0, #c8c8c8 40%, #b0b0b0 70%, #989898);
 }
 
 .nav-icon {
