@@ -27,29 +27,162 @@
       });
     }
     
-    // Cross-browser circular navigation fallback
+    // Enhanced navigation with performance optimizations and modern features
     document.addEventListener('DOMContentLoaded', function() {
       const navCircles = document.querySelectorAll('.nav-circle');
+      const container = document.querySelector('.circular-nav-container');
+      const nav = document.querySelector('.circular-nav');
       
-      // Ensure proper positioning for all browsers
+      // Performance optimization flags
+      let isAnimating = false;
+      let animationFrame = null;
+      
+      // Enhanced touch and interaction handling
       navCircles.forEach((circle, index) => {
-        // Force reflow to ensure transforms are applied
-        circle.style.transform = getComputedStyle(circle).transform;
-        
-        // Add touch support for mobile devices
-        circle.addEventListener('touchstart', function() {
-          this.style.transform = this.style.transform.replace('scale(1)', 'scale(0.95)');
+        // Preload hover states for better performance
+        circle.addEventListener('mouseenter', function() {
+          if (!isAnimating) {
+            this.style.willChange = 'transform, background, box-shadow';
+          }
         });
         
-        circle.addEventListener('touchend', function() {
-          this.style.transform = this.style.transform.replace('scale(0.95)', 'scale(1)');
+        circle.addEventListener('mouseleave', function() {
+          this.style.willChange = 'auto';
         });
+        
+        // Enhanced touch feedback with haptic-like response
+        let touchStartTime = 0;
+        
+        circle.addEventListener('touchstart', function(e) {
+          touchStartTime = Date.now();
+          this.style.willChange = 'transform';
+          
+          // Add immediate visual feedback
+          this.style.transform = this.style.transform.replace(/scale\([^)]*\)/, 'scale(0.9)');
+          
+          // Prevent default to avoid iOS zoom on double-tap
+          e.preventDefault();
+        }, { passive: false });
+        
+        circle.addEventListener('touchend', function(e) {
+          const touchDuration = Date.now() - touchStartTime;
+          
+          // Smooth release animation
+          setTimeout(() => {
+            this.style.transform = this.style.transform.replace(/scale\([^)]*\)/, 'scale(1)');
+            this.style.willChange = 'auto';
+          }, 50);
+          
+          // Navigate if it was a quick tap (not a scroll)
+          if (touchDuration < 200) {
+            const href = this.getAttribute('href');
+            if (href && href !== '#') {
+              setTimeout(() => {
+                window.location.href = href;
+              }, 150);
+            }
+          }
+          
+          e.preventDefault();
+        });
+        
+        // Smooth scrolling for anchor links
+        if (circle.getAttribute('href').startsWith('#')) {
+          circle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
+        }
       });
       
-      // Force hardware acceleration
-      const container = document.querySelector('.circular-nav');
-      if (container) {
-        container.style.transform = 'translateZ(0)';
+      // Parallax-like background movement on mouse move
+      if (container && window.innerWidth > 768) {
+        let mouseX = 0, mouseY = 0;
+        let bgX = 0, bgY = 0;
+        
+        container.addEventListener('mousemove', function(e) {
+          const rect = this.getBoundingClientRect();
+          mouseX = (e.clientX - rect.left) / rect.width;
+          mouseY = (e.clientY - rect.top) / rect.height;
+        });
+        
+        // Smooth background animation
+        function animateBackground() {
+          const targetX = (mouseX - 0.5) * 2;
+          const targetY = (mouseY - 0.5) * 2;
+          
+          bgX += (targetX - bgX) * 0.02;
+          bgY += (targetY - bgY) * 0.02;
+          
+          container.style.backgroundPosition = `${50 + bgX}% ${50 + bgY}%`;
+          
+          requestAnimationFrame(animateBackground);
+        }
+        
+        animateBackground();
+      }
+      
+      // Intersection Observer for entrance animations
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.animationPlayState = 'running';
+            }
+          });
+        }, {
+          threshold: 0.1
+        });
+        
+        if (nav) {
+          observer.observe(nav);
+        }
+      }
+      
+      // Force hardware acceleration and optimize for animations
+      if (nav) {
+        nav.style.transform = 'translateZ(0)';
+        nav.style.backfaceVisibility = 'hidden';
+        nav.style.perspective = '1000px';
+      }
+      
+      // Preload critical resources for smoother transitions
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = 'https://fonts.googleapis.com';
+      document.head.appendChild(link);
+      
+      // Optimize scroll performance
+      let ticking = false;
+      
+      function updateOnScroll() {
+        // Add any scroll-based animations here
+        ticking = false;
+      }
+      
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(updateOnScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+      
+      // Handle reduced motion preferences
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        navCircles.forEach(circle => {
+          circle.style.animation = 'none';
+        });
+        if (nav) {
+          nav.style.animation = 'none';
+        }
       }
     });
   </script>
