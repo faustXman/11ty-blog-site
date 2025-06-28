@@ -897,7 +897,7 @@ section,
 }
 
 /* Enhanced Touch and Mobile Optimizations */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (pointer: coarse) {
   .circular-nav-container {
     /* Optimize background for mobile */
     background-attachment: scroll;
@@ -918,7 +918,7 @@ section,
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) and (pointer: coarse) {
   .circular-nav-container {
     /* Further mobile optimizations */
     will-change: auto;
@@ -943,7 +943,7 @@ section,
   .nav-circle {
     /* Enhanced shadows for high-DPI displays */
     box-shadow: 
-      var(--shadow-elevation-3),
+      0 8px 32px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.5),
       inset 0 -1px 0 rgba(0, 0, 0, 0.15),
       0 0 0 0.5px rgba(255, 255, 255, 0.08);
