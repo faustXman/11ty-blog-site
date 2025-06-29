@@ -840,6 +840,7 @@ section,
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.6);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-play-state: paused !important;
 }
 
 /* Optimized active state */
@@ -921,54 +922,10 @@ section,
   }
 }
 
-/* Enhanced Touch and Mobile Optimizations */
-@media (max-width: 768px) and (pointer: coarse) and (hover: none) {
+/* Mobile Optimizations - NO HOVER OVERRIDES */
+@media (max-width: 768px) {
   .circular-nav-container {
-    /* Optimize background for mobile */
     background-attachment: scroll;
-  }
-  
-  .nav-circle:hover {
-    /* Reduce hover scale on touch devices - keep all visual effects */
-    transform: var(--base-transform) scale(1.1) translateZ(0);
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(12px);
-    box-shadow: 
-      0 8px 32px rgba(255, 255, 255, 0.2),
-      0 6px 20px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .nav-circle:active {
-    /* Enhanced touch feedback */
-    transform: var(--base-transform) scale(0.85) translateZ(0);
-  }
-}
-
-@media (max-width: 480px) and (pointer: coarse) and (hover: none) {
-  .circular-nav-container {
-    /* Further mobile optimizations */
-    will-change: auto;
-  }
-  
-  .circular-nav {
-    /* Reduced breathing animation on small screens */
-    animation: navEntrance 1.5s var(--timing-ease-out-expo) forwards;
-  }
-  
-  .nav-circle:hover {
-    /* Minimal hover effects on small screens - keep visual effects */
-    transform: var(--base-transform) scale(1.05) translateZ(0);
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    box-shadow: 
-      0 6px 24px rgba(255, 255, 255, 0.15),
-      0 4px 16px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    animation: none;
   }
 }
 
