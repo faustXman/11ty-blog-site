@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Toggle Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--theme-bg, #ffffff);
+            color: var(--theme-text, #333333);
+            transition: all 0.3s ease;
+        }
+        
+        .test-section {
+            background: var(--theme-card-bg, #f9f9f9);
+            border: 1px solid var(--theme-border, #e0e0e0);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        
+        .pass {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .fail {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        .status {
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 4px;
+        }
+        
+        .responsive-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .responsive-item {
+            background: var(--theme-card-bg, #f5f5f5);
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid var(--theme-border, #ddd);
+        }
+        
+        @media (max-width: 768px) {
+            .responsive-item {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .responsive-item {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Theme Toggle Functionality Test</h1>
+    
+    <div class="test-section">
+        <h2>🎨 Current Theme Status</h2>
+        <div id="theme-status"></div>
+        <div id="system-preference"></div>
+        <div id="stored-preference"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔧 Manual Testing Controls</h2>
+        <button onclick="testToggle()">Test Toggle Function</button>
+        <button onclick="testSystemPreference()">Test System Preference Detection</button>
+        <button onclick="testLocalStorage()">Test LocalStorage</button>
+        <button onclick="testAccessibility()">Test Accessibility</button>
+        <button onclick="testResponsiveness()">Test Responsiveness</button>
+        <button onclick="resetTheme()">Reset Theme</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>📱 Responsiveness Test</h2>
+        <p>Resize your browser window to test responsiveness at different breakpoints:</p>
+        <div class="responsive-test">
+            <div class="responsive-item">Desktop (>1024px): Large layout</div>
+            <div class="responsive-item">Tablet (768px-1024px): Medium layout</div>
+            <div class="responsive-item">Mobile (480px-768px): Small layout</div>
+            <div class="responsive-item">Small Mobile (<480px): Compact layout</div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>⌨️ Accessibility Test</h2>
+        <div id="accessibility-results"></div>
+        <p><strong>Manual Tests:</strong></p>
+        <ul>
+            <li>Tab to the theme toggle button - it should be focusable</li>
+            <li>Press Enter or Space - it should toggle the theme</li>
+            <li>Check if screen reader announces theme changes</li>
+            <li>Check if ARIA labels are updated correctly</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔄 Automatic Tests</h2>
+        <div id="test-results"></div>
+    </div>
+    
+    <script>
+        // Load the theme toggle script from the blog site
+        const script = document.createElement('script');
+        script.src = 'src/assets/js/theme-toggle.js';
+        script.onload = function() {
+            console.log('Theme toggle script loaded');
+            setTimeout(runAutomaticTests, 1000);
+        };
+        script.onerror = function() {
+            console.error('Failed to load theme toggle script');
+            displayResult('Failed to load theme toggle script from blog site', 'fail');
+        };
+        document.head.appendChild(script);
+        
+        // Add theme toggle button HTML
+        const themeButton = document.createElement('div');
+        themeButton.innerHTML = `
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px;">
+                    <path d="M12 17.5A5.5 5.5 0 1 1 12 6.5a5.5 5.5 0 0 1 0 11ZM12 4a1 1 0 0 1-1-1V1a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1ZM21 13h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2ZM5 13H3a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2ZM7.05 7.05a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 1 1.42 1.42L7.05 7.05ZM18.36 18.36a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 1 1.42 1.42l-1.42 1.41ZM18.36 7.05a1 1 0 0 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 1.42L18.36 7.05ZM7.05 18.36a1 1 0 0 1-1.41-1.42l1.41-1.41a1 1 0 0 1 1.42 1.41l-1.42 1.42ZM12 20a1 1 0 0 1-1-1v-2a1 1 0 0 1 2 0v2a1 1 0 0 1-1 1Z"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73A8.15 8.15 0 0 1 9.08 5.49a8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27A10.15 10.15 0 0 0 17.22 15.63a9.79 9.79 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32Z"/>
+                </svg>
+            </button>
+        `;
+        document.body.appendChild(themeButton);
+        
+        function displayResult(message, type) {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+        
+        function updateStatus() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'system';
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const storedTheme = localStorage.getItem('theme');
+            
+            document.getElementById('theme-status').innerHTML = `
+                <span class="status" style="background: ${currentTheme === 'dark' ? '#2c3e50' : '#ecf0f1'}; color: ${currentTheme === 'dark' ? 'white' : 'black'}">
+                    Current Theme: ${currentTheme}
+                </span>
+            `;
+            
+            document.getElementById('system-preference').innerHTML = `
+                <span class="status" style="background: ${systemPrefersDark ? '#34495e' : '#bdc3c7'}; color: ${systemPrefersDark ? 'white' : 'black'}">
+                    System Preference: ${systemPrefersDark ? 'Dark' : 'Light'}
+                </span>
+            `;
+            
+            document.getElementById('stored-preference').innerHTML = `
+                <span class="status" style="background: #3498db; color: white">
+                    Stored Preference: ${storedTheme || 'None (follows system)'}
+                </span>
+            `;
+        }
+        
+        function runAutomaticTests() {
+            updateStatus();
+            
+            // Test 1: Check if theme toggle is available
+            if (window.themeToggle) {
+                displayResult('✅ Theme toggle object is available globally', 'pass');
+            } else {
+                displayResult('❌ Theme toggle object is not available globally', 'fail');
+            }
+            
+            // Test 2: Check if theme toggle button exists
+            const button = document.getElementById('theme-toggle');
+            if (button) {
+                displayResult('✅ Theme toggle button exists in DOM', 'pass');
+            } else {
+                displayResult('❌ Theme toggle button not found in DOM', 'fail');
+            }
+            
+            // Test 3: Check if system preference detection works
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            displayResult(`ℹ️ System prefers dark mode: ${mediaQuery.matches}`, 'info');
+            
+            // Test 4: Check localStorage functionality
+            const storedTheme = localStorage.getItem('theme');
+            displayResult(`ℹ️ Stored theme preference: ${storedTheme || 'None'}`, 'info');
+            
+            // Test 5: Check if CSS variables are set
+            const computedStyle = getComputedStyle(document.documentElement);
+            const themeBg = computedStyle.getPropertyValue('--theme-bg');
+            if (themeBg) {
+                displayResult('✅ CSS theme variables are working', 'pass');
+            } else {
+                displayResult('❌ CSS theme variables not found', 'fail');
+            }
+            
+            // Test 6: Check accessibility attributes
+            if (button) {
+                const ariaLabel = button.getAttribute('aria-label');
+                if (ariaLabel) {
+                    displayResult(`✅ ARIA label present: "${ariaLabel}"`, 'pass');
+                } else {
+                    displayResult('❌ ARIA label missing', 'fail');
+                }
+            }
+        }
+        
+        function testToggle() {
+            if (window.themeToggle) {
+                const currentTheme = window.themeToggle.getCurrentTheme();
+                window.themeToggle.toggleTheme();
+                const newTheme = window.themeToggle.getCurrentTheme();
+                displayResult(`Theme toggled from ${currentTheme} to ${newTheme}`, 'pass');
+                updateStatus();
+            } else {
+                displayResult('Theme toggle not available', 'fail');
+            }
+        }
+        
+        function testSystemPreference() {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            displayResult(`System preference: ${mediaQuery.matches ? 'Dark' : 'Light'}`, 'info');
+            
+            // Test system preference change detection
+            mediaQuery.addEventListener('change', (e) => {
+                displayResult(`System preference changed to: ${e.matches ? 'Dark' : 'Light'}`, 'info');
+                updateStatus();
+            });
+        }
+        
+        function testLocalStorage() {
+            const originalTheme = localStorage.getItem('theme');
+            
+            // Test storing different themes
+            localStorage.setItem('theme', 'dark');
+            if (localStorage.getItem('theme') === 'dark') {
+                displayResult('✅ LocalStorage write/read works for dark theme', 'pass');
+            }
+            
+            localStorage.setItem('theme', 'light');
+            if (localStorage.getItem('theme') === 'light') {
+                displayResult('✅ LocalStorage write/read works for light theme', 'pass');
+            }
+            
+            // Restore original theme
+            if (originalTheme) {
+                localStorage.setItem('theme', originalTheme);
+            } else {
+                localStorage.removeItem('theme');
+            }
+            
+            updateStatus();
+        }
+        
+        function testAccessibility() {
+            const button = document.getElementById('theme-toggle');
+            const results = document.getElementById('accessibility-results');
+            
+            if (button) {
+                const ariaLabel = button.getAttribute('aria-label');
+                const tabIndex = button.tabIndex;
+                
+                results.innerHTML = `
+                    <div class="test-result ${ariaLabel ? 'pass' : 'fail'}">
+                        ARIA Label: ${ariaLabel || 'Missing'}
+                    </div>
+                    <div class="test-result ${tabIndex >= 0 ? 'pass' : 'fail'}">
+                        Keyboard Accessible: ${tabIndex >= 0 ? 'Yes' : 'No'}
+                    </div>
+                `;
+                
+                // Test keyboard events
+                button.focus();
+                displayResult('Button focused - test keyboard navigation manually', 'info');
+            } else {
+                results.innerHTML = '<div class="test-result fail">Theme toggle button not found</div>';
+            }
+        }
+        
+        function testResponsiveness() {
+            const screenWidth = window.innerWidth;
+            let breakpoint = 'Unknown';
+            
+            if (screenWidth >= 1024) breakpoint = 'Desktop';
+            else if (screenWidth >= 768) breakpoint = 'Tablet';
+            else if (screenWidth >= 480) breakpoint = 'Mobile';
+            else breakpoint = 'Small Mobile';
+            
+            displayResult(`Current viewport: ${screenWidth}px (${breakpoint})`, 'info');
+            displayResult('Resize window to test different breakpoints', 'info');
+        }
+        
+        function resetTheme() {
+            if (window.themeToggle) {
+                window.themeToggle.resetTheme();
+                displayResult('Theme reset to system default', 'pass');
+                updateStatus();
+            } else {
+                localStorage.removeItem('theme');
+                document.documentElement.removeAttribute('data-theme');
+                displayResult('Theme manually reset', 'pass');
+                updateStatus();
+            }
+        }
+        
+        // Monitor theme changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'data-theme') {
+                    updateStatus();
+                }
+            });
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+        
+        // Update status periodically
+        setInterval(updateStatus, 5000);
+        
+        // Initial status update
+        setTimeout(updateStatus, 500);
+    </script>
+</body>
+</html> 

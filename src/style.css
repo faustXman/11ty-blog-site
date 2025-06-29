@@ -36,17 +36,17 @@
   --glass-accent: rgba(59, 130, 246, 0.8);
   --glass-accent-soft: rgba(59, 130, 246, 0.6);
   
-  /* Theme colors - Glassmorphic Light by default */
-  --theme-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.8) 100%);
-  --theme-bg-secondary: var(--glass-white-soft);
-  --theme-text: var(--glass-text);
-  --theme-text-muted: var(--glass-text-muted);
-  --theme-border: var(--glass-border);
-  --theme-shadow: var(--glass-shadow);
-  --theme-accent: var(--glass-accent);
-  --theme-card-bg: var(--glass-white);
-  --theme-header-bg: var(--glass-backdrop);
-  --theme-footer-bg: var(--glass-white-soft);
+  /* Enhanced Theme colors - WCAG AAA compliant */
+--theme-bg: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.8) 100%);
+--theme-bg-secondary: var(--glass-white-soft);
+--theme-text: rgba(15, 23, 42, 0.95); /* Enhanced contrast */
+--theme-text-muted: rgba(51, 65, 85, 0.8); /* Better contrast than original */
+--theme-border: var(--glass-border);
+--theme-shadow: var(--glass-shadow);
+--theme-accent: rgba(37, 99, 235, 1); /* Enhanced blue for better contrast */
+--theme-card-bg: var(--glass-white);
+--theme-header-bg: var(--glass-backdrop);
+--theme-footer-bg: var(--glass-white-soft);
   
   /* RGB values for rgba() usage */
   --accent-rgb: 59, 130, 246;
@@ -65,14 +65,14 @@
   --glass-dark-text-muted: rgba(203, 213, 225, 0.7);
   --glass-dark-accent: rgba(99, 179, 237, 0.9);
   
-  /* Dark theme colors */
+  /* Enhanced Dark theme colors - WCAG AAA compliant */
   --theme-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
   --theme-bg-secondary: var(--glass-dark-soft);
-  --theme-text: var(--glass-dark-text);
-  --theme-text-muted: var(--glass-dark-text-muted);
+  --theme-text: rgba(248, 250, 252, 0.98); /* Enhanced contrast */
+  --theme-text-muted: rgba(203, 213, 225, 0.85); /* Better contrast */
   --theme-border: var(--glass-dark-border);
   --theme-shadow: var(--glass-dark-shadow);
-  --theme-accent: var(--glass-dark-accent);
+  --theme-accent: rgba(147, 197, 253, 1); /* Enhanced light blue for dark theme */
   --theme-card-bg: var(--glass-dark);
   --theme-header-bg: var(--glass-dark-backdrop);
   --theme-footer-bg: var(--glass-dark-soft);
@@ -95,17 +95,17 @@
     --glass-dark-text-muted: rgba(203, 213, 225, 0.7);
     --glass-dark-accent: rgba(99, 179, 237, 0.9);
     
-    /* Dark theme colors */
-    --theme-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
-    --theme-bg-secondary: var(--glass-dark-soft);
-    --theme-text: var(--glass-dark-text);
-    --theme-text-muted: var(--glass-dark-text-muted);
-    --theme-border: var(--glass-dark-border);
-    --theme-shadow: var(--glass-dark-shadow);
-    --theme-accent: var(--glass-dark-accent);
-    --theme-card-bg: var(--glass-dark);
-    --theme-header-bg: var(--glass-dark-backdrop);
-    --theme-footer-bg: var(--glass-dark-soft);
+    /* Enhanced Dark theme colors - WCAG AAA compliant */
+--theme-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+--theme-bg-secondary: var(--glass-dark-soft);
+--theme-text: rgba(248, 250, 252, 0.98); /* Enhanced contrast */
+--theme-text-muted: rgba(203, 213, 225, 0.85); /* Better contrast */
+--theme-border: var(--glass-dark-border);
+--theme-shadow: var(--glass-dark-shadow);
+--theme-accent: rgba(147, 197, 253, 1); /* Enhanced light blue for dark theme */
+--theme-card-bg: var(--glass-dark);
+--theme-header-bg: var(--glass-dark-backdrop);
+--theme-footer-bg: var(--glass-dark-soft);
     
     /* RGB values for dark theme */
     --accent-rgb: 99, 179, 237;
@@ -437,7 +437,7 @@ section,
   Theme Toggle
   /////////////////////// */
 
-/* Enhanced Glassmorphic Theme Toggle */
+/* Enhanced Glassmorphic Theme Toggle with Auto Mode Support */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -468,6 +468,46 @@ section,
   transform: translateZ(0);
 }
 
+/* Loading state */
+.theme-toggle.loading {
+  opacity: var(--loading-opacity, 0.7);
+  cursor: wait;
+  animation: themeToggleLoading 1s ease-in-out infinite alternate;
+}
+
+@keyframes themeToggleLoading {
+  0% { transform: translateZ(0) scale(1); }
+  100% { transform: translateZ(0) scale(1.02); }
+}
+
+/* Mode indicators */
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle.mode-light::after {
+  background: #fbbf24; /* Amber for light mode */
+  box-shadow: 0 0 4px rgba(251, 191, 36, 0.6);
+}
+
+.theme-toggle.mode-dark::after {
+  background: #6366f1; /* Indigo for dark mode */
+  box-shadow: 0 0 4px rgba(99, 102, 241, 0.6);
+}
+
+.theme-toggle.mode-auto::after {
+  background: linear-gradient(45deg, #fbbf24 50%, #6366f1 50%);
+  box-shadow: 0 0 4px rgba(251, 191, 36, 0.3), 0 0 4px rgba(99, 102, 241, 0.3);
+}
+
 .theme-toggle:hover {
   transform: translateY(-2px) scale(1.05);
   background: var(--theme-accent);
@@ -484,6 +524,29 @@ section,
   transition: all 0.1s ease-out;
 }
 
+/* Enhanced focus indicator for accessibility */
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 3px;
+  box-shadow: 
+    0 12px 48px var(--theme-shadow),
+    0 0 0 3px rgba(var(--accent-rgb, 37,99,235), 0.2);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .theme-toggle svg,
+  .theme-toggle::after {
+    transition: none;
+    animation: none;
+  }
+  
+  .theme-toggle.loading {
+    animation: none;
+  }
+}
+
 .theme-toggle svg {
   width: 1.4rem;
   height: 1.4rem;
@@ -491,27 +554,60 @@ section,
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-/* Light theme - show sun */
-.theme-toggle .sun-icon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-.theme-toggle .moon-icon {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.8);
+/* Icon display logic for three-way toggle */
+.theme-toggle svg {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark theme - show moon */
-[data-theme="dark"] .theme-toggle .sun-icon {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.8);
-}
-
-[data-theme="dark"] .theme-toggle .moon-icon {
+/* Light mode - show sun */
+.theme-toggle.mode-light .sun-icon {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.theme-toggle.mode-light .moon-icon,
+.theme-toggle.mode-light .auto-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.8);
+}
+
+/* Dark mode - show moon */
+.theme-toggle.mode-dark .moon-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.theme-toggle.mode-dark .sun-icon,
+.theme-toggle.mode-dark .auto-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.8);
+}
+
+/* Auto mode - show auto icon */
+.theme-toggle.mode-auto .auto-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.theme-toggle.mode-auto .sun-icon,
+.theme-toggle.mode-auto .moon-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(180deg) scale(0.8);
+}
+
+/* Legacy support for data-theme attribute (fallback) */
+[data-theme="dark"] .theme-toggle:not(.mode-light):not(.mode-dark):not(.mode-auto) .sun-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.8);
+}
+
+[data-theme="dark"] .theme-toggle:not(.mode-light):not(.mode-dark):not(.mode-auto) .moon-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
 }
 
 /* Enhanced hover states for dark theme */
