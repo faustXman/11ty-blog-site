@@ -39,21 +39,28 @@
       
       // Enhanced touch and interaction handling
       navCircles.forEach((circle, index) => {
-        // Preload hover states for better performance
-        circle.addEventListener('mouseenter', function() {
-          if (!isAnimating) {
-            this.style.willChange = 'transform, background, box-shadow';
+        // Optimize for performance - only enable will-change during interactions
+        circle.addEventListener('pointerenter', function() {
+          if (window.matchMedia('(hover: hover)').matches) {
+            this.style.willChange = 'scale, background';
           }
         });
         
-        circle.addEventListener('mouseleave', function() {
+        circle.addEventListener('pointerleave', function() {
           this.style.willChange = 'auto';
         });
         
-        // Direct click handling - don't prevent default for better performance
+        // Improved click handling for better user experience
         circle.addEventListener('click', function(e) {
           const href = this.getAttribute('href');
-          // Only handle special cases, let normal links work normally
+          
+          // Add visual feedback for clicks
+          this.style.scale = '0.9';
+          setTimeout(() => {
+            this.style.scale = '';
+          }, 150);
+          
+          // Handle anchor links with smooth scroll
           if (href && href.startsWith('#') && href !== '#') {
             e.preventDefault();
             const targetId = href.substring(1);
@@ -65,32 +72,53 @@
               });
             }
           }
-          // Let normal page navigation work without interference
         });
         
-        // Removed duplicate anchor link handling - now handled above
+        // Improved touch handling for mobile devices
+        circle.addEventListener('touchstart', function(e) {
+          // Prevent iOS double-tap zoom
+          e.preventDefault();
+          this.style.scale = '0.95';
+        }, { passive: false });
+        
+        circle.addEventListener('touchend', function() {
+          this.style.scale = '';
+        });
       });
       
-      // Parallax-like background movement on mouse move
-      if (container && window.innerWidth > 768) {
-        let mouseX = 0, mouseY = 0;
+      // Optimized parallax background movement (only on desktop)
+      if (container && window.innerWidth > 768 && window.matchMedia('(hover: hover)').matches) {
+        let mouseX = 0.5, mouseY = 0.5;
         let bgX = 0, bgY = 0;
+        let isMouseActive = false;
         
-        container.addEventListener('mousemove', function(e) {
+        container.addEventListener('pointerenter', function() {
+          isMouseActive = true;
+        });
+        
+        container.addEventListener('pointerleave', function() {
+          isMouseActive = false;
+        });
+        
+        container.addEventListener('pointermove', function(e) {
+          if (!isMouseActive) return;
+          
           const rect = this.getBoundingClientRect();
           mouseX = (e.clientX - rect.left) / rect.width;
           mouseY = (e.clientY - rect.top) / rect.height;
         });
         
-        // Smooth background animation
+        // Smooth background animation with better performance
         function animateBackground() {
-          const targetX = (mouseX - 0.5) * 2;
-          const targetY = (mouseY - 0.5) * 2;
-          
-          bgX += (targetX - bgX) * 0.02;
-          bgY += (targetY - bgY) * 0.02;
-          
-          container.style.backgroundPosition = `${50 + bgX}% ${50 + bgY}%`;
+          if (isMouseActive) {
+            const targetX = (mouseX - 0.5) * 1.5;
+            const targetY = (mouseY - 0.5) * 1.5;
+            
+            bgX += (targetX - bgX) * 0.015;
+            bgY += (targetY - bgY) * 0.015;
+            
+            container.style.backgroundPosition = `${50 + bgX}% ${50 + bgY}%`;
+          }
           
           requestAnimationFrame(animateBackground);
         }
@@ -98,7 +126,7 @@
         animateBackground();
       }
       
-      // Intersection Observer for entrance animations
+      // Intersection Observer for better performance
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
@@ -107,7 +135,8 @@
             }
           });
         }, {
-          threshold: 0.1
+          threshold: 0.1,
+          rootMargin: '50px'
         });
         
         if (nav) {
@@ -115,24 +144,11 @@
         }
       }
       
-      // Force hardware acceleration and optimize for animations
-      if (nav) {
-        nav.style.transform = 'translateZ(0)';
-        nav.style.backfaceVisibility = 'hidden';
-        nav.style.perspective = '1000px';
-      }
-      
-      // Preload critical resources for smoother transitions
-      const link = document.createElement('link');
-      link.rel = 'preconnect';
-      link.href = 'https://fonts.googleapis.com';
-      document.head.appendChild(link);
-      
-      // Optimize scroll performance
+      // Optimize scroll performance with passive listeners
       let ticking = false;
       
       function updateOnScroll() {
-        // Add any scroll-based animations here
+        // Minimal scroll-based updates for better performance
         ticking = false;
       }
       
@@ -144,14 +160,44 @@
       }, { passive: true });
       
       // Handle reduced motion preferences
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        navCircles.forEach(circle => {
-          circle.style.animation = 'none';
-        });
-        if (nav) {
-          nav.style.animation = 'none';
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      
+      function handleReducedMotion(mediaQuery) {
+        if (mediaQuery.matches) {
+          navCircles.forEach(circle => {
+            circle.style.animation = 'fadeIn 0.5s ease forwards';
+          });
+          if (nav) {
+            nav.style.animation = 'none';
+          }
         }
       }
+      
+      handleReducedMotion(prefersReducedMotion);
+      prefersReducedMotion.addListener(handleReducedMotion);
+      
+      // Enhanced keyboard navigation
+      navCircles.forEach((circle, index) => {
+        circle.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
+          
+          // Arrow key navigation
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = (index + 1) % navCircles.length;
+            navCircles[nextIndex].focus();
+          }
+          
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = (index - 1 + navCircles.length) % navCircles.length;
+            navCircles[prevIndex].focus();
+          }
+        });
+      });
     });
   </script>
 </body>
