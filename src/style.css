@@ -522,28 +522,30 @@ section,
 .theme-toggle::after {
   content: '';
   position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 6px;
-  height: 6px;
+  bottom: 3px;
+  right: 3px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: all 0.3s ease;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .theme-toggle.mode-light::after {
   background: #fbbf24; /* Amber for light mode */
-  box-shadow: 0 0 4px rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 6px rgba(251, 191, 36, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .theme-toggle.mode-dark::after {
   background: #6366f1; /* Indigo for dark mode */
-  box-shadow: 0 0 4px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .theme-toggle.mode-auto::after {
-  background: linear-gradient(45deg, #fbbf24 50%, #6366f1 50%);
-  box-shadow: 0 0 4px rgba(251, 191, 36, 0.3), 0 0 4px rgba(99, 102, 241, 0.3);
+  background: #10b981; /* Emerald green for auto mode */
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .theme-toggle:hover {
@@ -585,20 +587,16 @@ section,
   }
 }
 
-.theme-toggle svg {
-  width: 1.4rem;
-  height: 1.4rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
 /* Icon display logic for three-way toggle */
 .theme-toggle svg {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
   transform: translate(-50%, -50%);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 /* Light mode - show sun */
@@ -669,6 +667,52 @@ section,
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 -8px 32px var(--theme-shadow);
+}
+
+/* Footer logo link styling */
+.site-footer a[aria-label="Go to homepage"] {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  cursor: pointer;
+}
+
+.site-footer a[aria-label="Go to homepage"]:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+.site-footer a[aria-label="Go to homepage"]:hover .logo {
+  transform: scale(1.08);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+}
+
+.site-footer a[aria-label="Go to homepage"]:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb, 37,99,235), 0.2);
+  background: rgba(var(--accent-rgb, 37,99,235), 0.05);
+}
+
+.site-footer a[aria-label="Go to homepage"]:active {
+  transform: translateY(-1px) scale(0.97);
+  transition: all 0.1s ease-out;
+}
+
+.site-footer a[aria-label="Go to homepage"]:active .logo {
+  transform: scale(1.03);
+}
+
+/* Enhanced footer logo sizing */
+.site-footer .logo {
+  width: 10rem;
+  height: auto;
+  margin-bottom: 0;
+  transition: all 0.3s ease;
 }
 
 /* //////////////////////
@@ -1336,6 +1380,16 @@ section,
 
 .snippet .btn {
   grid-area: button;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.snippet:hover .btn {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .snippet__title {
