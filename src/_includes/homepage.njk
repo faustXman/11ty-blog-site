@@ -50,30 +50,25 @@
           this.style.willChange = 'auto';
         });
         
-        // Simplified click handling
+        // Direct click handling - don't prevent default for better performance
         circle.addEventListener('click', function(e) {
-          e.preventDefault();
           const href = this.getAttribute('href');
-          if (href && href !== '#' && !href.startsWith('#')) {
-            window.location.href = href;
-          }
-        });
-        
-        // Smooth scrolling for anchor links
-        if (circle.getAttribute('href').startsWith('#')) {
-          circle.addEventListener('click', function(e) {
+          // Only handle special cases, let normal links work normally
+          if (href && href.startsWith('#') && href !== '#') {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
-            
             if (targetElement) {
               targetElement.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
               });
             }
-          });
-        }
+          }
+          // Let normal page navigation work without interference
+        });
+        
+        // Removed duplicate anchor link handling - now handled above
       });
       
       // Parallax-like background movement on mouse move
