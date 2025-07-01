@@ -457,6 +457,9 @@ section,
 .nav-list {
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .nav-list a {
@@ -482,8 +485,9 @@ section,
   -ms-user-select: none;
   user-select: none;
   /* Add subtle background for better touch feedback */
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid transparent;
+  background: var(--theme-card-bg);
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 2px 8px var(--theme-shadow);
 }
 
 .nav-list a:focus,
@@ -506,42 +510,83 @@ section,
     min-width: 48px;
     font-size: 1rem;
     font-weight: 500;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--theme-card-bg);
+    border: 1px solid var(--theme-border);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 16px var(--theme-shadow);
     /* Ensure buttons are easily tappable */
     margin: 0 0.25rem;
+    color: var(--theme-text);
   }
   
   .nav-list a:hover {
     background: rgba(var(--accent-rgb, 37, 99, 235), 0.15);
-    border-color: rgba(var(--accent-rgb, 37, 99, 235), 0.3);
+    border-color: rgba(var(--accent-rgb, 37, 99, 235), 0.4);
+    color: var(--theme-accent);
   }
   
   .nav-list a:active {
     background: rgba(var(--accent-rgb, 37, 99, 235), 0.25);
     transform: scale(0.95);
     transition: all 0.1s ease;
+    color: var(--theme-accent);
   }
 }
 
-/* Additional touch-friendly styles for devices that don't support hover */
+/* Touch-friendly styles for devices that don't support hover */
 @media (hover: none) and (pointer: coarse) {
   .nav-list a {
     padding: 1rem 1.25rem;
     min-height: 48px;
     min-width: 48px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--theme-card-bg);
+    border: 1px solid var(--theme-border);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 16px var(--theme-shadow);
+    color: var(--theme-text);
+    font-weight: 500;
   }
   
   .nav-list a:active {
     background: rgba(var(--accent-rgb, 37, 99, 235), 0.3);
     transform: scale(0.95);
     transition: transform 0.1s ease;
+    color: var(--theme-accent);
+  }
+}
+
+/* Dark theme specific navigation enhancements */
+:root[data-theme="dark"] .nav-list a {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: rgba(248, 250, 252, 0.95);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .nav-list a:hover {
+  background: rgba(99, 179, 237, 0.2);
+  border-color: rgba(99, 179, 237, 0.5);
+  color: rgba(147, 197, 253, 1);
+}
+
+:root[data-theme="dark"] .nav-list a:active {
+  background: rgba(99, 179, 237, 0.3);
+  color: rgba(147, 197, 253, 1);
+}
+
+/* Ensure navigation has proper stacking context for touch events */
+.page-header nav {
+  position: relative;
+  z-index: 100;
+}
+
+/* Mobile tap enhancement - ensure immediate response */
+@media (pointer: coarse) {
+  .nav-list a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 }
 
