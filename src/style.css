@@ -1320,12 +1320,41 @@ section,
     justify-content: center !important;
     /* Ensure proper cursor */
     cursor: pointer !important;
+    /* CRITICAL: Lock position during touch to prevent ghost movement */
+    position: absolute !important;
+    /* Preserve original transform positioning but lock it */
+    transform-origin: center center !important;
   }
   
   .nav-circle:active {
     background: rgba(255, 255, 255, 0.8) !important;
     border-color: rgba(255, 255, 255, 1) !important;
+    /* CRITICAL: Don't scale during touch to prevent positioning glitch */
     scale: 1 !important;
+    /* Lock the transform to prevent ghost movement */
+    transform: var(--original-transform, none) !important;
+  }
+  
+  /* Fix for each positioned circle - maintain their original positions */
+  .nav-circle:nth-child(1) {
+    /* Lock the specific transform to prevent movement */
+    --original-transform: translateY(calc(var(--nav-radius) * -1));
+  }
+  
+  .nav-circle:nth-child(2) {
+    --original-transform: translateX(calc(var(--nav-radius) * 0.951)) translateY(calc(var(--nav-radius) * -0.309));
+  }
+  
+  .nav-circle:nth-child(3) {
+    --original-transform: translateX(calc(var(--nav-radius) * 0.588)) translateY(calc(var(--nav-radius) * 0.809));
+  }
+  
+  .nav-circle:nth-child(4) {
+    --original-transform: translateX(calc(var(--nav-radius) * -0.588)) translateY(calc(var(--nav-radius) * 0.809));
+  }
+  
+  .nav-circle:nth-child(5) {
+    --original-transform: translateX(calc(var(--nav-radius) * -0.951)) translateY(calc(var(--nav-radius) * -0.309));
   }
 }
 

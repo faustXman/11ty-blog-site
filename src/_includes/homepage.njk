@@ -55,10 +55,12 @@
         circle.addEventListener('click', function(e) {
           const href = this.getAttribute('href');
           
-          // Add visual feedback for clicks
-          this.style.scale = '0.9';
+          // Add visual feedback for clicks without transform changes
+          this.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+          this.style.opacity = '0.9';
           setTimeout(() => {
-            this.style.scale = '';
+            this.style.backgroundColor = '';
+            this.style.opacity = '';
           }, 150);
           
           // Handle anchor links with smooth scroll
@@ -79,12 +81,16 @@
         circle.addEventListener('touchstart', function(e) {
           // Prevent iOS double-tap zoom
           e.preventDefault();
-          this.style.scale = '0.95';
+          this.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+          this.style.opacity = '0.8';
+          // Don't modify scale to prevent ghost movement
           this.touchStarted = true;
         }, { passive: false });
         
         circle.addEventListener('touchend', function(e) {
-          this.style.scale = '';
+          this.style.backgroundColor = '';
+          this.style.opacity = '';
+          // Don't reset scale to prevent ghost movement
           
           // CRITICAL FIX: Actually navigate on touchend!
           if (this.touchStarted) {

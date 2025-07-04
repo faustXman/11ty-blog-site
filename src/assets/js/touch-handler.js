@@ -95,10 +95,11 @@ class TouchHandler {
       };
     }
     
-    // Add visual feedback
+    // Add visual feedback without transform changes to prevent position glitches
     element.classList.add('touch-active');
     element.style.opacity = '0.7';
-    element.style.transform = 'scale(0.95)';
+    element.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+    // Don't modify transform to prevent ghost movement
     
     // Vibrate if supported
     if (navigator.vibrate) {
@@ -125,7 +126,8 @@ class TouchHandler {
     // Remove visual feedback
     element.classList.remove('touch-active');
     element.style.opacity = '';
-    element.style.transform = '';
+    element.style.backgroundColor = '';
+    // Don't reset transform to prevent position glitches
     
     // Check if this was a valid tap
     if (touchDuration < this.maxTouchDuration && touchMovement < this.maxTouchMovement) {
@@ -155,7 +157,8 @@ class TouchHandler {
     // Remove visual feedback
     element.classList.remove('touch-active');
     element.style.opacity = '';
-    element.style.transform = '';
+    element.style.backgroundColor = '';
+    // Don't reset transform to prevent position glitches
   }
 
   handleClick(e, element) {
@@ -168,7 +171,8 @@ class TouchHandler {
     if (e.pointerType === 'touch') {
       element.classList.add('touch-active');
       element.style.opacity = '0.7';
-      element.style.transform = 'scale(0.95)';
+      element.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+      // Don't modify transform to prevent ghost movement
     }
   }
 
@@ -176,7 +180,8 @@ class TouchHandler {
     if (e.pointerType === 'touch') {
       element.classList.remove('touch-active');
       element.style.opacity = '';
-      element.style.transform = '';
+      element.style.backgroundColor = '';
+      // Don't reset transform to prevent position glitches
       
       console.log('TouchHandler: Pointer up navigation');
       this.navigateToLink(element);
