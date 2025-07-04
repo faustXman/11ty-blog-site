@@ -1861,49 +1861,273 @@ section,
   text-decoration: none;
   display: inline-block;
   line-height: 1;
-  padding: 0.75em 1.75em;
-  border-radius: 12px;
+  padding: 0.9rem 1.4rem;
+  
+  /* Modern ultra-rounded pill shape */
+  border-radius: 50px;
+  
   align-self: start;
   justify-self: start;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Enhanced typography */
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.025em;
+  
+  /* Ensure touch targets are properly sized */
+  min-height: 44px;
+  min-width: 44px;
+  
+  /* Touch optimizations */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  /* Performance optimizations */
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  position: relative;
+  z-index: 1;
 }
 
 .btn:focus {
-  outline: 0.125em solid var(--theme-accent);
-  outline-offset: 0.25em;
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb, 37,99,235), 0.2);
 }
 
 .btn--primary {
-  background: var(--theme-accent);
   color: white;
-  font-weight: var(--fw-700);
-  border: 1px solid var(--theme-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px var(--theme-shadow);
+  font-weight: 500;
+  
+  /* Modern gradient background */
+  background: linear-gradient(135deg, 
+    var(--theme-accent) 0%, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.9) 100%);
+  border: 1.5px solid var(--theme-accent);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+  /* Enhanced modern shadow system */
+  box-shadow: 
+    0 4px 16px rgba(var(--accent-rgb, 37, 99, 235), 0.25),
+    0 2px 8px rgba(var(--accent-rgb, 37, 99, 235), 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
+
 .btn--primary:hover,
 .btn--primary:focus {
-  background: var(--glass-accent-soft);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 48px var(--theme-shadow);
+  color: white;
+  
+  /* Enhanced hover gradient */
+  background: linear-gradient(135deg, 
+    rgba(var(--accent-rgb, 37, 99, 235), 1) 0%, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.8) 100%);
+  border-color: var(--theme-accent);
+  
+  /* Enhanced hover shadow */
+  box-shadow: 
+    0 8px 32px rgba(var(--accent-rgb, 37, 99, 235), 0.35),
+    0 4px 16px rgba(var(--accent-rgb, 37, 99, 235), 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  
+  /* Smooth lift effect */
+  transform: translateY(-2px) translateZ(0);
+}
+
+.btn--primary:active {
+  /* Pressed state with inset effect */
+  background: linear-gradient(135deg, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.8) 0%, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.6) 100%);
+  box-shadow: 
+    0 2px 8px rgba(var(--accent-rgb, 37, 99, 235), 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0px) scale(0.98) translateZ(0);
+  transition: all 0.15s ease-out;
 }
 
 .btn--neutral {
-  background: var(--theme-card-bg);
   color: var(--theme-text);
-  font-weight: var(--fw-700);
-  border: 1px solid var(--theme-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px var(--theme-shadow);
+  font-weight: 500;
+  
+  /* Enhanced glassmorphic background */
+  background: linear-gradient(135deg, 
+    var(--theme-card-bg) 0%, 
+    rgba(255, 255, 255, 0.8) 100%);
+  border: 1.5px solid var(--theme-border);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+  /* Enhanced shadow system */
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .btn--neutral:hover,
 .btn--neutral:focus {
-  background: var(--theme-bg-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 48px var(--theme-shadow);
+  color: var(--theme-text);
+  
+  /* Enhanced hover background */
+  background: linear-gradient(135deg, 
+    var(--theme-bg-secondary) 0%, 
+    rgba(255, 255, 255, 0.9) 100%);
+  border-color: var(--theme-border);
+  
+  /* Enhanced hover shadow */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Smooth lift effect */
+  transform: translateY(-2px) translateZ(0);
+}
+
+.btn--neutral:active {
+  /* Pressed state */
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.6) 0%, 
+    rgba(255, 255, 255, 0.4) 100%);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(0px) scale(0.98) translateZ(0);
+  transition: all 0.15s ease-out;
+}
+
+/* Mobile-specific button optimizations */
+@media (max-width: 768px) {
+  .btn {
+    padding: 1rem 1.5rem;
+    min-height: 48px;
+    min-width: 48px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    
+    /* Maintain pill shape on mobile */
+    border-radius: 50px;
+  }
+  
+  .btn--primary {
+    /* Enhanced mobile touch styling */
+    background: linear-gradient(135deg, 
+      var(--theme-accent) 0%, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.9) 100%);
+    border: 1.5px solid var(--theme-accent);
+    
+    box-shadow: 
+      0 6px 20px rgba(var(--accent-rgb, 37, 99, 235), 0.3),
+      0 3px 10px rgba(var(--accent-rgb, 37, 99, 235), 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  .btn--primary:hover {
+    box-shadow: 
+      0 8px 24px rgba(var(--accent-rgb, 37, 99, 235), 0.35),
+      0 4px 12px rgba(var(--accent-rgb, 37, 99, 235), 0.25);
+    transform: translateY(-1px);
+  }
+  
+  .btn--primary:active {
+    box-shadow: 
+      0 3px 12px rgba(var(--accent-rgb, 37, 99, 235), 0.4),
+      inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.96) translateY(0px);
+  }
+}
+
+/* Touch-friendly styles for devices that don't support hover */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    padding: 1rem 1.5rem;
+    min-height: 48px;
+    min-width: 48px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    
+    /* Maintain pill shape for touch devices */
+    border-radius: 50px;
+  }
+  
+  .btn--primary {
+    /* Enhanced touch-friendly styling */
+    background: linear-gradient(135deg, 
+      var(--theme-accent) 0%, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.9) 100%);
+    border: 1.5px solid var(--theme-accent);
+    
+    box-shadow: 
+      0 6px 20px rgba(var(--accent-rgb, 37, 99, 235), 0.3),
+      0 3px 10px rgba(var(--accent-rgb, 37, 99, 235), 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  .btn--primary:active {
+    /* Touch active state */
+    background: linear-gradient(135deg, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.8) 0%, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.6) 100%);
+    box-shadow: 
+      0 4px 16px rgba(var(--accent-rgb, 37, 99, 235), 0.4),
+      inset 0 2px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(0.96);
+    transition: all 0.15s ease;
+  }
+  
+  .btn--neutral:active {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.6) 0%, 
+      rgba(255, 255, 255, 0.4) 100%);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.1),
+      inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: scale(0.96);
+    transition: all 0.15s ease;
+  }
+}
+
+/* Dark theme specific button enhancements */
+[data-theme="dark"] .btn--primary {
+  background: linear-gradient(135deg, 
+    rgba(147, 197, 253, 1) 0%, 
+    rgba(147, 197, 253, 0.9) 100%);
+  border-color: rgba(147, 197, 253, 1);
+  color: var(--theme-bg);
+  
+  box-shadow: 
+    0 4px 16px rgba(147, 197, 253, 0.25),
+    0 2px 8px rgba(147, 197, 253, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .btn--primary:hover {
+  background: linear-gradient(135deg, 
+    rgba(147, 197, 253, 0.9) 0%, 
+    rgba(147, 197, 253, 0.8) 100%);
+  
+  box-shadow: 
+    0 8px 32px rgba(147, 197, 253, 0.35),
+    0 4px 16px rgba(147, 197, 253, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .btn--neutral {
+  background: linear-gradient(135deg, 
+    var(--theme-card-bg) 0%, 
+    rgba(30, 41, 59, 0.8) 100%);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
 }
 
 /* //////////////////////
