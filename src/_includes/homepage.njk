@@ -10,6 +10,7 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="/style.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="/assets/js/touch-handler.js"></script>
   </head>
 <body>
   <main>
@@ -79,10 +80,37 @@
           // Prevent iOS double-tap zoom
           e.preventDefault();
           this.style.scale = '0.95';
+          this.touchStarted = true;
         }, { passive: false });
         
-        circle.addEventListener('touchend', function() {
+        circle.addEventListener('touchend', function(e) {
           this.style.scale = '';
+          
+          // CRITICAL FIX: Actually navigate on touchend!
+          if (this.touchStarted) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            console.log('Homepage touch navigation to:', href);
+            
+            if (href) {
+              if (href.startsWith('#') && href !== '#') {
+                // Handle anchor links
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }
+              } else {
+                // Regular navigation
+                window.location.href = href;
+              }
+            }
+            
+            this.touchStarted = false;
+          }
         });
       });
       

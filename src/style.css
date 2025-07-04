@@ -1282,7 +1282,9 @@ section,
   
   /* Ensure touch events are properly captured */
   .nav-circle * {
-    pointer-events: none;
+    pointer-events: auto;
+    /* Ensure child elements don't interfere with touch */
+    touch-action: manipulation;
   }
   
   /* Disable potentially interfering container effects on touch devices */
