@@ -458,16 +458,42 @@ section,
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   align-items: center;
+  
+  /* Enhanced spacing for modern pill buttons */
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  
+  /* Smooth container animations */
+  transition: gap 0.3s ease;
+}
+
+/* Responsive gap adjustment */
+@media (max-width: 768px) {
+  .nav-list {
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .nav-list::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .nav-list a {
   color: var(--theme-text);
   text-decoration: none;
-  transition: all 0.3s ease;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.9rem 1.4rem;
+  
+  /* Modern ultra-rounded corners */
+  border-radius: 50px;
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -477,6 +503,12 @@ section,
   z-index: 10;
   min-height: 44px;
   min-width: 44px;
+  
+  /* Enhanced typography */
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.025em;
+  
   /* Ensure touch targets are properly sized for mobile */
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -484,96 +516,215 @@ section,
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* Add subtle background for better touch feedback */
-  background: var(--theme-card-bg);
-  border: 1px solid var(--theme-border);
-  box-shadow: 0 2px 8px var(--theme-shadow);
+  
+  /* Enhanced glassmorphic pill-shaped background */
+  background: linear-gradient(135deg, 
+    var(--theme-card-bg) 0%, 
+    rgba(255, 255, 255, 0.8) 100%);
+  border: 1.5px solid var(--theme-border);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  
+  /* Enhanced modern shadow system */
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Performance optimizations */
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
 .nav-list a:focus,
 .nav-list a:hover {
-  color: var(--theme-accent);
-  text-decoration: underline;
-  background: rgba(var(--accent-rgb, 37, 99, 235), 0.1);
+  color: white;
+  text-decoration: none;
+  
+  /* Modern gradient hover effect */
+  background: linear-gradient(135deg, 
+    var(--theme-accent) 0%, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.9) 100%);
+  border-color: var(--theme-accent);
+  
+  /* Enhanced hover shadow */
+  box-shadow: 
+    0 8px 32px rgba(var(--accent-rgb, 37, 99, 235), 0.25),
+    0 4px 16px rgba(var(--accent-rgb, 37, 99, 235), 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  
+  /* Smooth lift effect */
+  transform: translateY(-2px) translateZ(0);
 }
 
 .nav-list a:active {
-  background: rgba(var(--accent-rgb, 37, 99, 235), 0.2);
-  transform: scale(0.98);
+  /* Pressed state with inset effect */
+  background: linear-gradient(135deg, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.8) 0%, 
+    rgba(var(--accent-rgb, 37, 99, 235), 0.6) 100%);
+  box-shadow: 
+    0 2px 8px rgba(var(--accent-rgb, 37, 99, 235), 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0px) scale(0.98) translateZ(0);
+  transition: all 0.15s ease-out;
 }
 
 /* Mobile-specific touch optimizations for navigation links */
 @media (max-width: 768px) {
   .nav-list a {
-    padding: 1rem 1.25rem;
+    padding: 1rem 1.5rem;
     min-height: 48px;
     min-width: 48px;
-    font-size: 1rem;
-    font-weight: 500;
-    background: var(--theme-card-bg);
-    border: 1px solid var(--theme-border);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 4px 16px var(--theme-shadow);
+    font-size: 0.9rem;
+    font-weight: 600;
+    
+    /* Maintain pill shape on mobile */
+    border-radius: 50px;
+    
+    /* Enhanced mobile glassmorphic background */
+    background: linear-gradient(135deg, 
+      var(--theme-card-bg) 0%, 
+      rgba(255, 255, 255, 0.9) 100%);
+    border: 1.5px solid var(--theme-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    /* Enhanced mobile shadows */
+    box-shadow: 
+      0 6px 20px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    
     /* Ensure buttons are easily tappable */
     margin: 0 0.25rem;
     color: var(--theme-text);
   }
   
   .nav-list a:hover {
-    background: rgba(var(--accent-rgb, 37, 99, 235), 0.15);
-    border-color: rgba(var(--accent-rgb, 37, 99, 235), 0.4);
-    color: var(--theme-accent);
+    /* Mobile hover with modern pill styling */
+    background: linear-gradient(135deg, 
+      var(--theme-accent) 0%, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.9) 100%);
+    border-color: var(--theme-accent);
+    color: white;
+    
+    box-shadow: 
+      0 8px 24px rgba(var(--accent-rgb, 37, 99, 235), 0.3),
+      0 4px 12px rgba(var(--accent-rgb, 37, 99, 235), 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    
+    transform: translateY(-1px);
   }
   
   .nav-list a:active {
-    background: rgba(var(--accent-rgb, 37, 99, 235), 0.25);
-    transform: scale(0.95);
+    background: linear-gradient(135deg, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.8) 0%, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.7) 100%);
+    box-shadow: 
+      0 3px 12px rgba(var(--accent-rgb, 37, 99, 235), 0.4),
+      inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.96) translateY(0px);
     transition: all 0.1s ease;
-    color: var(--theme-accent);
+    color: white;
   }
 }
 
 /* Touch-friendly styles for devices that don't support hover */
 @media (hover: none) and (pointer: coarse) {
   .nav-list a {
-    padding: 1rem 1.25rem;
+    padding: 1rem 1.5rem;
     min-height: 48px;
     min-width: 48px;
-    background: var(--theme-card-bg);
-    border: 1px solid var(--theme-border);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 4px 16px var(--theme-shadow);
+    
+    /* Maintain modern pill shape for touch devices */
+    border-radius: 50px;
+    
+    /* Enhanced touch-friendly glassmorphic background */
+    background: linear-gradient(135deg, 
+      var(--theme-card-bg) 0%, 
+      rgba(255, 255, 255, 0.95) 100%);
+    border: 1.5px solid var(--theme-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    /* Enhanced touch shadows */
+    box-shadow: 
+      0 6px 20px rgba(0, 0, 0, 0.12),
+      0 3px 10px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    
     color: var(--theme-text);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.9rem;
   }
   
   .nav-list a:active {
-    background: rgba(var(--accent-rgb, 37, 99, 235), 0.3);
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-    color: var(--theme-accent);
+    /* Modern pill active state for touch */
+    background: linear-gradient(135deg, 
+      var(--theme-accent) 0%, 
+      rgba(var(--accent-rgb, 37, 99, 235), 0.8) 100%);
+    border-color: var(--theme-accent);
+    
+    box-shadow: 
+      0 4px 16px rgba(var(--accent-rgb, 37, 99, 235), 0.4),
+      inset 0 2px 6px rgba(0, 0, 0, 0.2);
+    
+    transform: scale(0.96);
+    transition: all 0.15s ease;
+    color: white;
   }
 }
 
 /* Dark theme specific navigation enhancements */
 :root[data-theme="dark"] .nav-list a {
-  background: rgba(30, 41, 59, 0.8);
-  border-color: rgba(148, 163, 184, 0.3);
-  color: rgba(248, 250, 252, 0.95);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  /* Modern dark theme pill styling */
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.9) 0%, 
+    rgba(15, 23, 42, 0.8) 100%);
+  border-color: rgba(148, 163, 184, 0.4);
+  color: rgba(248, 250, 252, 0.98);
+  
+  /* Enhanced dark theme shadows */
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 3px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 :root[data-theme="dark"] .nav-list a:hover {
-  background: rgba(99, 179, 237, 0.2);
-  border-color: rgba(99, 179, 237, 0.5);
-  color: rgba(147, 197, 253, 1);
+  /* Modern dark theme hover with accent gradient */
+  background: linear-gradient(135deg, 
+    rgba(147, 197, 253, 1) 0%, 
+    rgba(99, 179, 237, 0.95) 100%);
+  border-color: rgba(147, 197, 253, 0.8);
+  color: rgba(15, 23, 42, 0.95);
+  
+  /* Enhanced dark theme hover shadows */
+  box-shadow: 
+    0 8px 32px rgba(147, 197, 253, 0.3),
+    0 4px 16px rgba(99, 179, 237, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  
+  transform: translateY(-2px) translateZ(0);
 }
 
 :root[data-theme="dark"] .nav-list a:active {
-  background: rgba(99, 179, 237, 0.3);
-  color: rgba(147, 197, 253, 1);
+  /* Modern dark theme active state */
+  background: linear-gradient(135deg, 
+    rgba(99, 179, 237, 0.9) 0%, 
+    rgba(59, 130, 246, 0.8) 100%);
+  border-color: rgba(99, 179, 237, 1);
+  color: white;
+  
+  box-shadow: 
+    0 3px 12px rgba(99, 179, 237, 0.5),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  transform: translateY(0px) scale(0.98) translateZ(0);
 }
 
 /* Ensure navigation has proper stacking context for touch events */
