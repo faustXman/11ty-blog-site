@@ -15,10 +15,10 @@ Pe calea gândului, unde-s risipit,<br>
 Nici pasu-mi nu-i întreg, nici împlinit.<br>
 Un zgomot surd, ecou de mii de știri,<br>
 Mă smulge în bucăți, în mii de încâlciri.<br>
-Mă-opresc deodată, într-un haos mut,<br>
+Mă opresc deodată, într-un haos mut,<br>
 Și-un strigăt bătrân din mine-a răzbătut:<br>
 Oare-i putere-acest fărâm, acest hău,<br>
-Sau slăbiciune, trendu-n val ce-l iau?<br>
+Sau slăbiciune, urcușu-n piept ce-l iau?<br>
 
 Având ca idee veghetoare conceptul potrivit căruia memoriile calculatoarelor se fragmentează, cauzând o funcționare mai lentă, ineficientă, necesitând astfel un proces de defragmentare, țintind o re-eficientizare a spațiului de stocare, am născocit întrebarea: este fragmentarea minții o putere a acesteia care ajută pe om să înțeleagă feluritele idei despre cele ce îl înconjoară sau o slăbiciune pe care industriașii vremurilor o folosesc pentru a lansa nenumăratele trenduri comerciale utile sau mai puțin utile omului firesc?<br>
 În era digitală, unde informația este rege și conectivitatea o mantra, creierul uman este supus unui asalt fără precedent. Ne găsim constant în mijlocul unui torent de date: notificări de la nenumărate aplicații, fluxuri infinite de știri, postări de la prieteni și necunoscuți, reclame personalizate și un zumzet constant de noi idei și provocări. Această realitate, deși promite o lume mai informată și mai interconectată, pare să ne împingă spre o stare de "fragmentare cognitivă" aproape permanentă.<br>
