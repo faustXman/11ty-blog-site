@@ -380,16 +380,35 @@ section,
   Header
   /////////////////////// */
 
+/* Hide footer on homepage */
+body:has(.circular-nav-container) .site-footer {
+  display: none;
+}
+
+/* CSS-Only Sticky Header - Works on all pages except homepage */
 .page-header {
-  padding: 2em 0;
-  background: var(--theme-header-bg);
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  padding: 0.8em 0;
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: all 0.3s ease;
-  border-bottom: 1px solid var(--theme-border);
-  box-shadow: 0 8px 32px var(--theme-shadow);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme header */
+:root[data-theme="dark"] .page-header {
+  background: rgba(15, 23, 42, 0.7);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* Homepage: disable sticky header */
+body:has(.circular-nav-container) .page-header {
   position: relative;
-  z-index: 1000;
+  display: none;
 }
 
 .page-header__content {
@@ -928,7 +947,7 @@ section,
 
 .site-footer {
   --logo-color: currentColor;
-  padding: 2em 0;
+  padding: 0.5em 0;
   color: var(--theme-text);
   background: var(--theme-footer-bg);
   backdrop-filter: blur(20px);
@@ -979,7 +998,7 @@ section,
 
 /* Enhanced footer logo sizing */
 .site-footer .logo {
-  width: 10rem;
+  width: 6rem;
   height: auto;
   margin-bottom: 0;
   transition: all 0.3s ease;

@@ -9,6 +9,7 @@
   <meta http-equiv="Expires" content="0">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="/style.css">
+  <script src="/assets/js/theme-toggle.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script src="/assets/js/touch-handler.js"></script>
   </head>
@@ -16,6 +17,7 @@
   <main>
     {{ content | safe }}
   </main>
+  {% include 'footer.njk' %}
 
   <script>
     if (window.netlifyIdentity) {
